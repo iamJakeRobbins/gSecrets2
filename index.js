@@ -6,10 +6,19 @@ const bodyParser =require('body-parser')
 const hbs = require('hbs');
 
 
-app.listen(port, () =>{
-	console.log(`listening at ${port}`);
-})
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
 app.set('view engine','hbs')
+
+// app.get('/', (req, res) => {
+// 	res.send('hello world')
+// })
+app.get('/', (req, res) => {
+	res.render('index.hbs')
+})
+
+
+app.listen(port, () =>{
+	console.log(`listening at ${port}`);
+})
