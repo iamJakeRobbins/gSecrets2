@@ -1,18 +1,18 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('secrets').del()
+  return knex('user_secrets').del()
     .then(function () {
       // Inserts seed entries
-      return knex('secrets').insert([
+      return knex('user_secrets').insert([
         {id: 1,
-					secret: 'test string one'
+					secret_id: 1, user_id: 2
 				},
         {id: 2,
-					secret: 'oh so secret'
+					secret_id: 1, user_id: 1
 				},
         {id: 3,
-					secret: 'dont even know anymore'
+					secret_id: 2, user_id: 2
 				}
       ]);
     });

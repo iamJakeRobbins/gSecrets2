@@ -13,6 +13,9 @@ app.set('view engine','hbs')
 app.get('/', (req, res) => {
 	res.render('index.hbs')
 })
+app.get('/index.hbs', (req, res) => {
+	res.render('index.hbs')
+})
 // route to login page
 app.get('/login.hbs', (req, res) =>{
 	res.render('login.hbs')
