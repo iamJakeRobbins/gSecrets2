@@ -4,6 +4,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const bodyParser =require('body-parser')
 const hbs = require('hbs');
+const queries = require('./db/queries');
 
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
@@ -13,11 +14,14 @@ app.set('view engine','hbs')
 app.get('/', (req, res) => {
 	res.render('index.hbs')
 })
-app.get('/index.hbs', (req, res) => {
-	res.render('index.hbs')
+app.post('/', (req, res)=>{
+	queries.login(req.body.code)
+	.then(user => {
+		console.log(user);
+	})
 })
 // route to login page
-app.get('/login.hbs', (req, res) =>{
+app.get('/login', (req, res) =>{
 	res.render('login.hbs')
 })
 
