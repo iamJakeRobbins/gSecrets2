@@ -17,8 +17,24 @@ app.get('/', (req, res) => {
 app.post('/', (req, res)=>{
 	queries.login(req.body.code)
 	.then(user => {
-		console.log(user);
+		res.redirect('/homepage/' + user[0].id)
 	})
+})
+app.get('/homepage/:id', (req, res)=>{
+	let secretObject = {
+		secrets: []
+	}
+queries.mySecrets(req.params.id)
+	.then(secrets =>{
+			for (var i = 0; i < secrets.length; i++) {
+				queries.getSecret(secrets[i].secret_id)
+					.then(aSecret => {
+						secretObject.secrets.push(aSecret[0].secret)
+						console.log(secretObject);
+					})
+			}
+})
+	res.render('homepage',secretObject)
 })
 // route to login page
 app.get('/login', (req, res) =>{
